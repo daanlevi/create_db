@@ -1,0 +1,20 @@
+---
+  - name: Include secrets vars in task
+    include_vars: "{{ playbook_dir }}/vault.yml"
+    name: secrets
+
+ - name: Run Mariadb container
+    docker_container:
+      name: 'mariadb'
+      recreate: true
+      restart_policy: unless-stopped
+      image: 'mariadb:latest'
+      volumes:
+        - "mariadb:/var/lib/mysql"
+      env:
+        MYSQL_ROOT_PASSWORD: "{{ secret_root }}"
+        MYSQL_DATABASE: "db"
+        MYSQL_USER: "zamro"
+        MYSQL_PASSWORD: "{{ secret_pass }}"
+      networks:
+        - name: "network_app"
