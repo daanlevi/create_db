@@ -27,6 +27,6 @@ The final step is to install the database server.
 
 ### Executing the playbook
 
-`ansible-playbook --ask-vault-pass create_vm.yml
+`ansible-playbook --ask-vault-pass create_vm.yml`
 
 password supersecretpassword
